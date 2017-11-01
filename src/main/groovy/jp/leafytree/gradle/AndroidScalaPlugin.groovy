@@ -14,7 +14,6 @@
  * limitations under the License.
  */
 package jp.leafytree.gradle
-import com.google.common.annotations.VisibleForTesting
 import org.apache.commons.io.FileUtils
 import org.codehaus.groovy.runtime.InvokerHelper
 import org.gradle.api.Plugin
@@ -27,6 +26,7 @@ import org.gradle.api.internal.file.DefaultSourceDirectorySetFactory
 import org.gradle.api.internal.file.FileResolver
 import org.gradle.api.internal.tasks.DefaultScalaSourceSet
 import org.gradle.api.tasks.scala.ScalaCompile
+import org.gradle.internal.impldep.com.google.common.annotations.VisibleForTesting
 import org.gradle.util.ConfigureUtil
 
 import javax.inject.Inject
@@ -34,7 +34,7 @@ import java.util.concurrent.atomic.AtomicReference
 /**
  * AndroidScalaPlugin adds scala language support to official gradle android plugin.
  */
-public class AndroidScalaPlugin implements Plugin<Project> {
+class AndroidScalaPlugin implements Plugin<Project> {
     private final FileResolver fileResolver
     @VisibleForTesting
     final Map<String, SourceDirectorySet> sourceDirectorySetMap = new HashMap<>()
@@ -51,7 +51,7 @@ public class AndroidScalaPlugin implements Plugin<Project> {
      * @param fileResolver the FileResolver
      */
     @Inject
-    public AndroidScalaPlugin(FileResolver fileResolver) {
+    AndroidScalaPlugin(FileResolver fileResolver) {
         this.fileResolver = fileResolver
     }
 
@@ -92,7 +92,7 @@ public class AndroidScalaPlugin implements Plugin<Project> {
         }
 
         project.tasks.withType(ScalaCompile) {
-            scalaCompileOptions.useAnt = false
+            //scalaCompileOptions.useAnt = false
         }
     }
 
@@ -102,7 +102,7 @@ public class AndroidScalaPlugin implements Plugin<Project> {
      * @param project currnet project
      * @param androidExtension extension of Android Plugin
      */
-    public void apply(Project project) {
+    void apply(Project project) {
         if (!["com.android.application", 
 		"android", 
 		"com.android.library", 
