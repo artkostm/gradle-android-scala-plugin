@@ -20,11 +20,11 @@ import org.apache.tools.ant.taskdefs.condition.Os
 class GradleWrapper {
     private final File dir
 
-    public GradleWrapper(File dir) {
+    GradleWrapper(File dir) {
         this.dir = dir
     }
 
-    public Process execute(List<String> options) {
+    Process execute(List<String> options) {
         def ext = (Os.isFamily(Os.FAMILY_WINDOWS) ? ".bat" : "")
         def gradlew = dir.absolutePath + File.separator + "gradlew" + ext
         def processBuilder = new ProcessBuilder([gradlew] + options)

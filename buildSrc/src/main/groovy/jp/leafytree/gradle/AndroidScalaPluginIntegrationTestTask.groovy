@@ -19,7 +19,7 @@ import com.google.common.io.ByteStreams
 import org.gradle.api.DefaultTask
 import org.gradle.api.tasks.TaskAction
 
-public class AndroidScalaPluginIntegrationTestTask extends DefaultTask {
+class AndroidScalaPluginIntegrationTestTask extends DefaultTask {
     @TaskAction
     def run() {
         def travis = System.getenv("TRAVIS").toString().toBoolean()
@@ -35,10 +35,10 @@ public class AndroidScalaPluginIntegrationTestTask extends DefaultTask {
         ].each { projectName, runOnTravis ->
             def gradleArgs = ["clean", "connectedCheck", "uninstallAll"]
             [
-                    ["2.2.1", true,  "2.11.7", "1.3.1", "android-22", "22.0.1", "8", "23"],
-                    ["2.2.1", false, "2.10.5", "1.3.1", "android-22", "22.0.1", "8", "23"],
-                    ["2.2.1", false, "2.11.7", "1.3.1", "android-22", "22.0.1", "21", "23"],
-                    ["2.2.1", false, "2.10.5", "1.3.1", "android-22", "22.0.1", "21", "23"],
+                    ["4.3", true,  "2.11.11", "3.0.0", "android-26", "26.0.2", "8", "26"],
+                    ["4.3", false, "2.11.11", "3.0.0", "android-26", "26.0.2", "8", "26"],
+                    ["4.3", false, "2.11.11", "3.0.0", "android-26", "26.0.2", "21", "26"],
+                    ["4.3", false, "2.11.11", "3.0.0", "android-26", "26.0.2", "21", "26"]
             ].each { testParameters ->
                 if (!travis || (runOnTravis && testParameters[1])) {
                     def gradleVersion = testParameters[0]
@@ -58,7 +58,7 @@ public class AndroidScalaPluginIntegrationTestTask extends DefaultTask {
                 distributionPath: "wrapper/dists",
                 zipStoreBase: "GRADLE_USER_HOME",
                 zipStorePath: "wrapper/dists",
-                distributionUrl: "http://services.gradle.org/distributions/gradle-" + gradleVersion + "-bin.zip",
+                distributionUrl: "http://services.gradle.org/distributions/gradle-" + gradleVersion + "-all.zip",
         ])
         gradleWrapperProperties
     }
@@ -73,7 +73,7 @@ public class AndroidScalaPluginIntegrationTestTask extends DefaultTask {
                 snaphotRepositoryUrl: snaphotRepositoryUrl,
                 scalaLibraryVersion: scalaLibraryVersion,
                 scalaDependencyVersion: scalaLibraryVersion.split("\\.").take(2).join("."),
-                androidScalaPluginVersion: "1.5-SNAPSHOT",
+                androidScalaPluginVersion: "1.6-SNAPSHOT",
                 androidPluginVersion: androidPluginVersion,
                 androidPluginCompileSdkVersion: androidPluginCompileSdkVersion,
                 androidPluginBuildToolsVersion: androidPluginBuildToolsVersion,
