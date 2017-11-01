@@ -17,26 +17,25 @@ package jp.leafytree.gradle
 
 import org.gradle.api.GradleException
 import org.gradle.api.Project
+import org.gradle.internal.impldep.org.junit.Before
+import org.gradle.internal.impldep.org.junit.Test
 import org.gradle.testfixtures.ProjectBuilder
-import org.junit.Assert
-import org.junit.Before
-import org.junit.Test
 
 class AndroidScalaPluginTest {
     Project project
 
     @Before
-    public void setUp() {
+    void setUp() {
         project = ProjectBuilder.builder().build()
         project.apply plugin: androidPluginName()
     }
 
-    public String androidPluginName() {
+    String androidPluginName() {
         "android"
     }
 
     @Test
-    public void applyingBeforeAndroidPluginShouldThrowException() {
+    void applyingBeforeAndroidPluginShouldThrowException() {
         project = ProjectBuilder.builder().build()
         try {
             project.apply plugin: "jp.leafytree.android-scala"

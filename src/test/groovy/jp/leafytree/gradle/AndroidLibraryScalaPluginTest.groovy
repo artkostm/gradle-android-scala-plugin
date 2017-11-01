@@ -17,7 +17,7 @@ package jp.leafytree.gradle
 
 class AndroidLibraryScalaPluginTest extends AndroidScalaPluginTest {
     @Override
-    public String androidPluginName() {
+    String androidPluginName() {
         "android-library"
     }
 }
